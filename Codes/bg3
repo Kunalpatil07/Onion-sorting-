@@ -1,0 +1,36 @@
+  img = imread('C:\Users\INDIA\Desktop\matlab codes\on1.jpeg');
+gray = rgb2gray(img);
+SE  = strel('Disk',1,4);
+morphologicalGradient = imsubtract(imdilate(gray, SE),imerode(gray, SE));
+mask = im2bw(morphologicalGradient,0.03);
+SE  = strel('Disk',3,4);
+mask = imclose(mask, SE);
+mask = imfill(mask,'holes');
+mask = bwareafilt(mask,1);
+notMask = ~mask;
+mask = mask | bwpropfilt(notMask,'Area',[-Inf, 5000 - eps(5000)]);
+showMaskAsOverlay(0.5,mask,'r');
+h = impoly(imgca,'closed',false);
+fcn = makeConstrainToRectFcn('impoly',get(imgca,'XLim'),get(imgca,'YLim'));
+setPositionConstraintFcn(h,fcn);
+gray = rgb2gray(img);
+gray(~mask) = 255;
+imshow(gray)
+%(The image is of class uint8; 255 is the value of "white" for uint8 images.)
+% Break down and mask the planes:
+r = img(:,:,1);
+g = img(:,:,2);
+b = img(:,:,3);
+r(~mask) = 255;
+g(~mask) = 255;
+b(~mask) = 255;
+% Reconstruct the RGB image:
+img = cat(3,r,g,b);
+imshow(img)
+shellMask = createShellMask(h,'thickness',3);
+imshow(shellMask);
+r = regionfill(r,shellMask);
+g = regionfill(g,shellMask);
+b = regionfill(b,shellMask);
+img = cat(3,r,g,b);
+imshow(img)
