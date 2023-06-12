@@ -103,9 +103,9 @@ This project is used by the following companies:
 ## Hi 👋,
 I’m Kunal Patil, I’m a Computer Engineer Graduate 👨‍💻 who is passionate about technologies .
 
-- 🔭 I’m currently pursuing *M.Tech* from Savitribai Phule Pune University,Pune.
+- 🔭 I have done *M.Tech* from Savitribai Phule Pune University,Pune.
 - 🌱 I’m currently learning *Python, Machine Learning*
-- ⚡ **Languages:** C++, Python3, Core Java
+- ⚡ **Languages:** C++, Python3, Core Java, HTML, CSS, Javascript
 
 
   
